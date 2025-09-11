@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer - Powered by Gemini AI</title>
+    <meta name="description" content="Analyze your website's SEO performance with AI-powered suggestions and structured analytics">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <span class="logo-icon">🔍</span>
+                SEO Analyzer
+                <span class="powered-by">Powered by Gemini AI</span>
+            </h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-card">
+                    <h2>Analyze Your Website's SEO Performance</h2>
+                    <p>Enter your website URL to get comprehensive SEO analytics and AI-powered improvement suggestions.</p>
+                    
+                    <form id="seo-form" class="seo-form">
+                        <div class="input-group">
+                            <label for="url-input" class="sr-only">Website URL</label>
+                            <input 
+                                type="url" 
+                                id="url-input" 
+                                placeholder="https://example.com" 
+                                required
+                                class="url-input"
+                            >
+                            <button type="submit" class="analyze-btn" id="analyze-btn">
+                                <span class="btn-text">Analyze Website</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <span class="spinner"></span>
+                                    Analyzing...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Loading Indicator -->
+            <section class="loading-section" id="loading-section" style="display: none;">
+                <div class="loading-card">
+                    <div class="loading-spinner"></div>
+                    <h3>Analyzing Your Website</h3>
+                    <p>Please wait while we analyze your website's SEO performance...</p>
+                    <ul class="loading-steps">
+                        <li class="step active" data-step="1">
+                            <span class="step-icon">🔍</span>
+                            Fetching webpage content
+                        </li>
+                        <li class="step" data-step="2">
+                            <span class="step-icon">📊</span>
+                            Extracting SEO metrics
+                        </li>
+                        <li class="step" data-step="3">
+                            <span class="step-icon">🤖</span>
+                            Generating AI suggestions
+                        </li>
+                        <li class="step" data-step="4">
+                            <span class="step-icon">✨</span>
+                            Preparing your report
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="results-section" style="display: none;">
+                <!-- SEO Score Card -->
+                <div class="score-card">
+                    <div class="score-header">
+                        <h2>SEO Score</h2>
+                        <div class="score-circle">
+                            <div class="score-value" id="seo-score">--</div>
+                            <div class="score-max">/100</div>
+                        </div>
+                    </div>
+                    <p class="score-explanation" id="score-explanation">
+                        Enter a URL above to get your SEO analysis
+                    </p>
+                </div>
+
+                <!-- Analytics Grid -->
+                <div class="analytics-grid">
+                    <h2 class="section-title">Structured Analytics</h2>
+                    
+                    <!-- Title Analysis -->
+                    <div class="analytics-card">
+                        <h3>Page Title</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Content:</span>
+                            <span class="metric-value" id="title-content">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Length:</span>
+                            <span class="metric-value" id="title-length">-- characters</span>
+                        </div>
+                        <div class="status-indicator" id="title-status"></div>
+                    </div>
+
+                    <!-- Meta Description -->
+                    <div class="analytics-card">
+                        <h3>Meta Description</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Content:</span>
+                            <span class="metric-value" id="meta-content">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Length:</span>
+                            <span class="metric-value" id="meta-length">-- characters</span>
+                        </div>
+                        <div class="status-indicator" id="meta-status"></div>
+                    </div>
+
+                    <!-- Content Analysis -->
+                    <div class="analytics-card">
+                        <h3>Content Analysis</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Word Count:</span>
+                            <span class="metric-value" id="word-count">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">H1 Headings:</span>
+                            <span class="metric-value" id="h1-count">--</span>
+                        </div>
+                        <div class="status-indicator" id="content-status"></div>
+                    </div>
+
+                    <!-- Image Analysis -->
+                    <div class="analytics-card">
+                        <h3>Image Optimization</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Total Images:</span>
+                            <span class="metric-value" id="total-images">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Missing Alt Text:</span>
+                            <span class="metric-value" id="missing-alt">--</span>
+                        </div>
+                        <div class="status-indicator" id="images-status"></div>
+                    </div>
+                </div>
+
+                <!-- AI Suggestions -->
+                <div class="suggestions-section">
+                    <h2 class="section-title">AI-Powered Suggestions</h2>
+                    <div class="suggestions-card">
+                        <div id="suggestions-list">
+                            <!-- Suggestions will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post Ideas -->
+                <div class="blog-ideas-section">
+                    <h2 class="section-title">Blog Post Ideas</h2>
+                    <div class="blog-ideas-grid" id="blog-ideas-grid">
+                        <!-- Blog ideas will be populated here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section" id="error-section" style="display: none;">
+                <div class="error-card">
+                    <div class="error-icon">⚠️</div>
+                    <h3>Analysis Failed</h3>
+                    <p id="error-message">Something went wrong during the analysis.</p>
+                    <button class="retry-btn" onclick="clearResults()">Try Again</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 SEO Analyzer. Powered by Google Gemini AI.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
