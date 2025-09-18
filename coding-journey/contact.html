@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡 ANN - 讓我們一起交流程式學習心得</title>
+
+    <!-- 引入 Google Fonts 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            /* 橙綠漸層背景 */
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #a8edea 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+
+        .content {
+            margin-top: 100px;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 48px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 30px;
+            margin-right: 20px;
+            width: 50px;
+        }
+
+        .contact-details h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .contact-details p {
+            margin: 0;
+            color: #666;
+            text-align: left;
+        }
+
+        .form-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+            transform: scale(1.02);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .fun-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+        }
+
+        .fun-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .fun-fact {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+        }
+
+        .fun-fact-emoji {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .fun-fact-text {
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .contact-item {
+                margin: 15px 0;
+                padding: 15px;
+            }
+
+            .contact-icon {
+                font-size: 24px;
+                margin-right: 15px;
+                width: 40px;
+            }
+
+            .fun-facts {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
+        /* 成功動畫 */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="my-first-webpage.html">🏠 首頁</a></li>
+            <li><a href="about.html">👋 關於我</a></li>
+            <li><a href="portfolio.html">💼 作品集</a></li>
+            <li><a href="contact.html" class="active">📞 聯絡我</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>📞 聯絡 ANN</h1>
+        <p style="font-size: 20px; margin-bottom: 50px; color: #555;">我很期待與你交流程式學習的心得和想法！ 💬</p>
+
+        <div class="contact-container">
+            <!-- 聯絡資訊 -->
+            <div class="contact-info">
+                <h2 style="color: #333; margin-bottom: 30px;">📮 聯絡方式</h2>
+
+                <div class="contact-item" onclick="copyToClipboard('ann.programmer@email.com')">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h3>電子信箱</h3>
+                        <p>ann.programmer@email.com<br><small>點擊複製到剪貼簿</small></p>
+                    </div>
+                </div>
+
+                <div class="contact-item" onclick="copyToClipboard('https://github.com/ann-programmer')">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-details">
+                        <h3>GitHub</h3>
+                        <p>查看我的程式碼<br><small>github.com/ann-programmer</small></p>
+                    </div>
+                </div>
+
+                <div class="contact-item" onclick="copyToClipboard('ANN 的程式學習筆記')">
+                    <div class="contact-icon">📝</div>
+                    <div class="contact-details">
+                        <h3>學習筆記</h3>
+                        <p>分享學習心得<br><small>持續更新中...</small></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-details">
+                        <h3>回覆時間</h3>
+                        <p>通常 1-2 天內回覆<br><small>學習時間：每天 2-4 小時</small></p>
+                    </div>
+                </div>
+
+                <!-- 社群連結 -->
+                <h3 style="color: #333; margin: 40px 0 20px;">🌐 社群媒體</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Discord">🎮</a>
+                    <a href="#" class="social-link" title="Instagram">📸</a>
+                </div>
+            </div>
+
+            <!-- 聯絡表單 -->
+            <div class="contact-form">
+                <h2 style="color: #333; margin-bottom: 30px;">✉️ 傳送訊息</h2>
+
+                <form id="advancedContactForm">
+                    <div class="form-group">
+                        <label for="senderName">你的名字 *</label>
+                        <input type="text" id="senderName" name="senderName" placeholder="請輸入你的名字" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senderEmail">電子信箱 *</label>
+                        <input type="email" id="senderEmail" name="senderEmail" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageType">訊息類型</label>
+                        <select id="messageType" name="messageType">
+                            <option value="question">❓ 程式問題</option>
+                            <option value="collaboration">🤝 合作邀請</option>
+                            <option value="learning">📚 學習交流</option>
+                            <option value="feedback">💭 網站回饋</option>
+                            <option value="other">💬 其他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="programmingLevel">你的程式經驗</label>
+                        <select id="programmingLevel" name="programmingLevel">
+                            <option value="">請選擇</option>
+                            <option value="beginner">🐣 完全初學者</option>
+                            <option value="learning">📖 學習中 (像我一樣)</option>
+                            <option value="intermediate">💪 有一些經驗</option>
+                            <option value="advanced">🚀 進階開發者</option>
+                            <option value="expert">👑 專家級</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageSubject">主旨 *</label>
+                        <input type="text" id="messageSubject" name="messageSubject" placeholder="簡單描述你的訊息主題" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="messageContent">訊息內容 *</label>
+                        <textarea id="messageContent" name="messageContent" rows="6" placeholder="詳細描述你想說的話...我很期待收到你的訊息！ 😊" required></textarea>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button type="submit" class="submit-btn">🚀 送出訊息</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 有趣資訊 -->
+        <div class="fun-section">
+            <h2 style="color: #333;">🎉 關於我的有趣事實</h2>
+            <div class="fun-facts">
+                <div class="fun-fact">
+                    <span class="fun-fact-emoji">☕</span>
+                    <div class="fun-fact-text">程式配咖啡<br>最佳學習組合</div>
+                </div>
+
+                <div class="fun-fact">
+                    <span class="fun-fact-emoji">🌙</span>
+                    <div class="fun-fact-text">夜貓子程式員<br>靈感在深夜</div>
+                </div>
+
+                <div class="fun-fact">
+                    <span class="fun-fact-emoji">🐛</span>
+                    <div class="fun-fact-text">Debug 偵探<br>喜歡解決問題</div>
+                </div>
+
+                <div class="fun-fact">
+                    <span class="fun-fact-emoji">📚</span>
+                    <div class="fun-fact-text">終身學習者<br>每天都在進步</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 50px 0; color: #666;">
+            <p>💝 感謝你花時間瀏覽我的網站！</p>
+            <p>不管你是程式新手還是經驗豐富的開發者，我都很期待與你交流！</p>
+        </div>
+    </div>
+
+    <script>
+        // 進階表單處理
+        document.getElementById('advancedContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('senderName').value,
+                email: document.getElementById('senderEmail').value,
+                type: document.getElementById('messageType').value,
+                level: document.getElementById('programmingLevel').value,
+                subject: document.getElementById('messageSubject').value,
+                message: document.getElementById('messageContent').value
+            };
+
+            if (formData.name && formData.email && formData.subject && formData.message) {
+                // 顯示詳細確認訊息
+                const typeText = getTypeText(formData.type);
+                const levelText = getLevelText(formData.level);
+
+                let confirmMessage = `✅ 訊息發送成功！\n\n`;
+                confirmMessage += `👋 ${formData.name}，謝謝你的來信！\n\n`;
+                confirmMessage += `📧 回覆信箱：${formData.email}\n`;
+                confirmMessage += `📝 訊息類型：${typeText}\n`;
+                if (formData.level) confirmMessage += `💻 程式經驗：${levelText}\n`;
+                confirmMessage += `🎯 主旨：${formData.subject}\n\n`;
+                confirmMessage += `我會盡快回覆你的訊息！期待我們的交流 😊`;
+
+                alert(confirmMessage);
+
+                // 清空表單
+                this.reset();
+
+                // 成功動畫效果
+                const submitBtn = document.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '✅ 已送出！';
+                submitBtn.style.background = 'linear-gradient(45deg, #4CAF50, #81C784)';
+                submitBtn.classList.add('success-animation');
+
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
+                    submitBtn.classList.remove('success-animation');
+                }, 4000);
+            }
+        });
+
+        function getTypeText(type) {
+            const types = {
+                'question': '❓ 程式問題',
+                'collaboration': '🤝 合作邀請',
+                'learning': '📚 學習交流',
+                'feedback': '💭 網站回饋',
+                'other': '💬 其他'
+            };
+            return types[type] || '💬 一般詢問';
+        }
+
+        function getLevelText(level) {
+            const levels = {
+                'beginner': '🐣 完全初學者',
+                'learning': '📖 學習中',
+                'intermediate': '💪 有一些經驗',
+                'advanced': '🚀 進階開發者',
+                'expert': '👑 專家級'
+            };
+            return levels[level] || '未指定';
+        }
+
+        // 複製到剪貼簿功能
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // 顯示複製成功提示
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(45deg, #4CAF50, #81C784);
+                    color: white;
+                    padding: 15px 30px;
+                    border-radius: 25px;
+                    font-weight: 700;
+                    z-index: 9999;
+                    animation: fadeInOut 2s ease-in-out;
+                `;
+                toast.textContent = '✅ 已複製到剪貼簿！';
+
+                // 添加動畫樣式
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                        50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                        100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    }
+                `;
+                document.head.appendChild(style);
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                    document.head.removeChild(style);
+                }, 2000);
+            }).catch(function() {
+                alert('複製失敗，請手動複製：' + text);
+            });
+        }
+
+        // 社群連結點擊效果
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.title;
+                alert(`🚀 ${platform} 功能開發中！\n\n目前專注於程式學習，社群功能即將推出 😊`);
+            });
+        });
+    </script>
+</body>
+</html>

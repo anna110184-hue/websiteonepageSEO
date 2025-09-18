@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於 ANN - 我的程式學習之旅</title>
+
+    <!-- 引入 Google Fonts 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            /* 不同的漸層背景 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+
+        .content {
+            margin-top: 100px;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 48px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 5px solid #4ecdc4;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: #4ecdc4;
+            font-size: 14px;
+        }
+
+        .timeline-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .timeline-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .about-card {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .skills {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="my-first-webpage.html">🏠 首頁</a></li>
+            <li><a href="about.html" class="active">👋 關於我</a></li>
+            <li><a href="portfolio.html">💼 作品集</a></li>
+            <li><a href="contact.html">📞 聯絡我</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>關於 ANN 👋</h1>
+
+        <div class="about-card">
+            <h2>🌟 我是誰？</h2>
+            <p>嗨！我是 ANN，一個對程式設計充滿熱情的初學者。這個網站記錄了我學習程式設計的旅程，從第一行 HTML 程式碼開始，到現在能夠建立互動式網站。</p>
+
+            <h3>💭 我的程式學習理念</h3>
+            <p>我相信學習程式設計不只是學習語法，更重要的是學習解決問題的思維方式。每一個小專案都是我成長的足跡。</p>
+
+            <h3>🎯 我的目標</h3>
+            <ul style="text-align: left; max-width: 400px; margin: 0 auto;">
+                <li>掌握 HTML、CSS 和 JavaScript 基礎</li>
+                <li>學習響應式網頁設計</li>
+                <li>建立自己的作品集網站</li>
+                <li>探索後端開發技術</li>
+                <li>成為全端開發者</li>
+            </ul>
+        </div>
+
+        <div class="about-card">
+            <h2>📚 學習時間軸</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">今天</div>
+                    <div class="timeline-title">🎉 完成第一個多頁網站</div>
+                    <div class="timeline-desc">學會了響應式設計、表單處理、多頁導航，還有美麗的 CSS 效果！</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">稍早</div>
+                    <div class="timeline-title">🎨 掌握 CSS 進階技巧</div>
+                    <div class="timeline-desc">學會漸層背景、文字效果、動畫和 Google Fonts 的使用。</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">開始</div>
+                    <div class="timeline-title">📝 第一個 HTML 網頁</div>
+                    <div class="timeline-desc">寫下第一行 HTML 程式碼：&lt;h1&gt;Hello, 我是 ANN！&lt;/h1&gt;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-card">
+            <h2>🛠️ 目前技能</h2>
+            <div class="skills">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">響應式設計</span>
+                <span class="skill-tag">表單處理</span>
+                <span class="skill-tag">Google Fonts</span>
+                <span class="skill-tag">CSS 漸層</span>
+                <span class="skill-tag">CSS 動畫</span>
+                <span class="skill-tag">多頁導航</span>
+            </div>
+        </div>
+
+        <div class="about-card">
+            <h2>💌 想對你說</h2>
+            <p>如果你也是程式設計的初學者，我想告訴你：<strong>開始永遠不會太晚！</strong></p>
+            <p>每一個專家都曾經是初學者。重要的是保持好奇心，不斷練習，享受創造的過程。</p>
+            <p>讓我們一起在程式設計的世界中探索無限可能！ 🚀</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一個網頁</title>
+
+    <!-- 引入 Google Fonts 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            /* 漸層背景：從淺紫到淺藍到淺粉 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* 導航欄 */
+        .navbar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+        }
+
+        .content {
+            margin-top: 100px;
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* 動畫效果定義 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            80% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+        }
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 48px;
+            /* 彩虹漸層文字 */
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* 文字陰影 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out;
+            cursor: pointer;
+        }
+
+        h1:hover {
+            animation: pulse 0.8s ease-in-out;
+        }
+        p {
+            color: white;
+            font-size: 24px;
+            font-weight: 400;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        /* 特殊的彩虹段落 */
+        .rainbow-text {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #a8edea, #fed6e3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        /* 表單樣式 */
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 2.5s ease-out;
+            transition: all 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #19547b 0%, #ffd89b 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            animation: pulse 3s infinite, glow 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        img:hover {
+            animation: bounce 1s ease infinite;
+            transform: scale(1.1);
+        }
+        .button {
+            /* 漸層按鈕背景 */
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            /* 懸停時改變漸層 */
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 手機響應式設計 - 當螢幕寬度小於 768px 時套用 */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .content {
+                margin-top: 80px;
+                padding: 20px 10px;
+            }
+            h1 {
+                font-size: 32px;
+            }
+            p {
+                font-size: 18px;
+            }
+            img {
+                width: 150px;
+                height: 150px;
+                margin: 15px;
+            }
+            .button {
+                display: block;
+                width: 80%;
+                margin: 15px auto;
+                font-size: 16px;
+            }
+        }
+
+        /* 超小手機響應式設計 - 當螢幕寬度小於 480px 時套用 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            p {
+                font-size: 16px;
+            }
+            img {
+                width: 120px;
+                height: 120px;
+                margin: 10px;
+            }
+            .button {
+                width: 90%;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="my-first-webpage.html" class="active">🏠 首頁</a></li>
+            <li><a href="about.html">👋 關於我</a></li>
+            <li><a href="portfolio.html">💼 作品集</a></li>
+            <li><a href="contact.html">📞 聯絡我</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>Hello, 我是 ANN！</h1>
+
+    <!-- 這是圖片標籤 -->
+    <img src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?w=200&h=200&fit=crop&crop=face" alt="可愛的小貓圖片">
+
+    <p>歡迎來到我的第一個網頁！</p>
+    <p class="rainbow-text">今天是我程式設計學習的第一天 🎉</p>
+    <p>看看這些美麗的顏色效果！✨</p>
+
+    <!-- 這些是連結按鈕 -->
+    <a href="https://www.google.com" class="button">去 Google 搜尋</a>
+    <a href="https://developer.mozilla.org/zh-TW/" class="button">學習更多程式</a>
+
+    <p>🎯 點擊上面的按鈕試試看！</p>
+
+    <!-- 互動表單 -->
+    <div class="form-container">
+        <h2 style="color: white; text-align: center; margin-bottom: 30px;">📝 聯絡 ANN</h2>
+
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">你的名字：</label>
+                <input type="text" id="name" name="name" placeholder="請輸入你的名字" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">電子信箱：</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">年齡：</label>
+                <select id="age" name="age">
+                    <option value="">請選擇年齡範圍</option>
+                    <option value="under18">18歲以下</option>
+                    <option value="18-25">18-25歲</option>
+                    <option value="26-35">26-35歲</option>
+                    <option value="36-50">36-50歲</option>
+                    <option value="over50">50歲以上</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="interest">你對什麼程式語言有興趣？</label>
+                <select id="interest" name="interest">
+                    <option value="">請選擇</option>
+                    <option value="html">HTML/CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                    <option value="csharp">C#</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">想對 ANN 說什麼：</label>
+                <textarea id="message" name="message" rows="4" placeholder="寫下你的想法..."></textarea>
+            </div>
+
+            <div style="text-align: center;">
+                <button type="submit" class="submit-btn">送出訊息 ✉️</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // 載入動畫效果
+        window.addEventListener('load', function() {
+            // 延遲顯示動畫元素
+            const animatedElements = document.querySelectorAll('h1, p, img, .form-container');
+            animatedElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+            });
+
+            // 添加滑鼠追蹤特效
+            document.addEventListener('mousemove', createFloatingParticles);
+        });
+
+        // 創建浮動粒子效果
+        function createFloatingParticles(e) {
+            // 限制創建頻率
+            if (Math.random() > 0.1) return;
+
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 6px;
+                height: 6px;
+                background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${e.clientX}px;
+                top: ${e.clientY}px;
+                animation: particleFloat 2s ease-out forwards;
+            `;
+
+            // 添加粒子動畫樣式
+            if (!document.getElementById('particle-style')) {
+                const style = document.createElement('style');
+                style.id = 'particle-style';
+                style.textContent = `
+                    @keyframes particleFloat {
+                        0% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(1);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translate(${Math.random() * 100 - 50}px, -50px) scale(0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            document.body.appendChild(particle);
+
+            // 清理粒子
+            setTimeout(() => {
+                if (document.body.contains(particle)) {
+                    document.body.removeChild(particle);
+                }
+            }, 2000);
+        }
+
+        // 標題點擊特效
+        document.querySelector('h1').addEventListener('click', function() {
+            // 創建爆炸效果
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createExplosionParticle(this);
+                }, i * 50);
+            }
+        });
+
+        function createExplosionParticle(element) {
+            const rect = element.getBoundingClientRect();
+            const particle = document.createElement('div');
+
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+            particle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${randomColor};
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${rect.left + rect.width / 2}px;
+                top: ${rect.top + rect.height / 2}px;
+                animation: explode 1.5s ease-out forwards;
+            `;
+
+            // 添加爆炸動畫樣式
+            if (!document.getElementById('explosion-style')) {
+                const style = document.createElement('style');
+                style.id = 'explosion-style';
+                style.textContent = `
+                    @keyframes explode {
+                        0% {
+                            opacity: 1;
+                            transform: translate(0, 0) scale(1);
+                        }
+                        100% {
+                            opacity: 0;
+                            transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) scale(0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                if (document.body.contains(particle)) {
+                    document.body.removeChild(particle);
+                }
+            }, 1500);
+        }
+
+        // JavaScript 互動功能
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            const interest = document.getElementById('interest').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert(`謝謝 ${name}！你的訊息已收到：\n\n"${message}"\n\n我會盡快回覆到 ${email} 📧`);
+
+                // 清空表單
+                this.reset();
+
+                // 添加成功動畫效果
+                const submitBtn = document.querySelector('.submit-btn');
+                submitBtn.innerHTML = '✅ 已送出！';
+                submitBtn.style.background = 'linear-gradient(45deg, #4CAF50, #81C784)';
+
+                setTimeout(() => {
+                    submitBtn.innerHTML = '送出訊息 ✉️';
+                    submitBtn.style.background = 'linear-gradient(45deg, #ffd89b 0%, #19547b 100%)';
+                }, 3000);
+            }
+        });
+    </script>
+    </div>
+</body>
+</html>
