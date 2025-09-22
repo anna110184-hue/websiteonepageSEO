@@ -1,5 +1,6 @@
 -- 塔羅牌App完整後端設置
 -- 創建用戶系統、占卜記錄和安全政策
+-- 注意：假設已存在 Tarot_card_meaning 表格包含所有塔羅牌資料
 
 -- 1. 用戶資料表 (擴展auth.users)
 CREATE TABLE IF NOT EXISTS user_profiles (
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE TABLE IF NOT EXISTS daily_cards (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
-    card_id UUID REFERENCES tarot_cards(id) NOT NULL,
+    card_id UUID REFERENCES Tarot_card_meaning(id) NOT NULL,
 
     -- 抽牌資訊
     is_reversed BOOLEAN DEFAULT false,
@@ -355,7 +356,7 @@ BEGIN
         tc.suit,
         tc.image_url,
         (allow_reversed AND random() < 0.3)::BOOLEAN as is_reversed
-    FROM tarot_cards tc
+    FROM Tarot_card_meaning tc
     WHERE tc.id != ALL(exclude_cards)
     ORDER BY random()
     LIMIT card_count;
