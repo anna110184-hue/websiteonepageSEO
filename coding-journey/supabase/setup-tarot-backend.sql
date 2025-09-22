@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE TABLE IF NOT EXISTS daily_cards (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
-    card_id UUID REFERENCES "Tarot_card_meaning"(id) NOT NULL,
+    card_id BIGINT REFERENCES "Tarot_card_meaning"(id) NOT NULL,
 
     -- 抽牌資訊
     is_reversed BOOLEAN DEFAULT false,
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS readings (
 
     -- 抽牌結果 (JSON格式)
     cards_drawn JSONB NOT NULL,
-    -- JSON格式: [{"card_id": "uuid", "position": 1, "is_reversed": false, "position_meaning": "past"}]
+    -- JSON格式: [{"card_id": 123, "position": 1, "is_reversed": false, "position_meaning": "past"}]
 
     total_cards INTEGER NOT NULL DEFAULT 1,
 
@@ -333,10 +333,10 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE FUNCTION get_random_tarot_cards(
     card_count INTEGER DEFAULT 1,
     allow_reversed BOOLEAN DEFAULT true,
-    exclude_cards UUID[] DEFAULT '{}'
+    exclude_cards BIGINT[] DEFAULT '{}'
 )
 RETURNS TABLE (
-    id UUID,
+    id BIGINT,
     name_en TEXT,
     name_zh TEXT,
     number INTEGER,

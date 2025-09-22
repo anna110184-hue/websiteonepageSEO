@@ -24,7 +24,7 @@
 
 ## 🚀 安裝步驟
 
-### 步驟 1: 診斷表格名稱問題
+### 步驟 1: 診斷表格名稱和資料類型問題
 ```sql
 -- 在 Supabase SQL Editor 執行
 \i supabase/fix-case-sensitive-references.sql
@@ -33,7 +33,15 @@
 - 檢查 `Tarot_card_meaning` 表格是否存在（不區分大小寫）
 - 顯示實際的表格名稱和結構
 - 驗證必要欄位是否存在
-- 測試相關函數
+
+```sql
+-- 在 Supabase SQL Editor 執行
+\i supabase/fix-data-types.sql
+```
+這個腳本會：
+- 檢查 `Tarot_card_meaning` 表中 `id` 欄位的資料類型
+- 建議正確的外鍵資料類型 (UUID vs BIGINT)
+- 檢查是否有衝突的現有表格
 
 ### 步驟 2: 修正表格引用
 ```sql
@@ -78,10 +86,23 @@ npm run test:api
 ## 🔧 故障排除
 
 ### 問題 1: "relation 'tarot_cards' does not exist"
-**原因**: 舊版腳本引用了錯誤的表格名稱
-**解決**: 確保執行了 `fix-tarot-references.sql`
+**原因**: 舊版腳本引用了錯誤的表格名稱或大小寫問題
+**解決**:
+1. 執行 `fix-case-sensitive-references.sql` 檢查表格名稱
+2. 執行 `fix-tarot-references.sql` 修正引用
 
-### 問題 2: "column does not exist"
+### 問題 2: "foreign key constraint cannot be implemented" 或 "incompatible types: uuid and bigint"
+**原因**: `card_id` 和 `Tarot_card_meaning.id` 的資料類型不匹配
+**解決**:
+1. 執行 `fix-data-types.sql` 檢查資料類型
+2. 如果 `Tarot_card_meaning.id` 是 BIGINT，使用更新後的 schema
+3. 如果已存在衝突的表格，先刪除後重建：
+```sql
+DROP TABLE IF EXISTS daily_cards CASCADE;
+DROP TABLE IF EXISTS readings CASCADE;
+```
+
+### 問題 3: "column does not exist"
 **原因**: `Tarot_card_meaning` 表格缺少必要欄位
 **解決**: 檢查表格結構，添加缺少的欄位：
 ```sql
@@ -95,11 +116,11 @@ ALTER TABLE Tarot_card_meaning ADD COLUMN IF NOT EXISTS keywords TEXT[];
 ALTER TABLE Tarot_card_meaning ADD COLUMN IF NOT EXISTS element TEXT;
 ```
 
-### 問題 3: Edge Functions 部署失敗
+### 問題 4: Edge Functions 部署失敗
 **原因**: 函數中的表格引用問題
 **解決**: 確保 `Tarot_card_meaning` 表格存在且有正確的欄位結構
 
-### 問題 4: API 測試失敗
+### 問題 5: API 測試失敗
 **原因**: 用戶認證或權限問題
 **解決**:
 1. 檢查 `.env` 檔案中的 Supabase 憑證

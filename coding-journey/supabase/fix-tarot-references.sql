@@ -7,10 +7,10 @@ DROP FUNCTION IF EXISTS get_random_tarot_cards(INTEGER, BOOLEAN, UUID[]);
 CREATE OR REPLACE FUNCTION get_random_tarot_cards(
     card_count INTEGER DEFAULT 1,
     allow_reversed BOOLEAN DEFAULT true,
-    exclude_cards UUID[] DEFAULT '{}'
+    exclude_cards BIGINT[] DEFAULT '{}'
 )
 RETURNS TABLE (
-    id UUID,
+    id BIGINT,
     name_en TEXT,
     name_zh TEXT,
     number INTEGER,
