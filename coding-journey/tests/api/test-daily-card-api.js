@@ -97,7 +97,7 @@ async function testDailyCardAPI() {
 
       if (postResult.success && postResult.data) {
         console.log('✅ 抽牌成功')
-        console.log(`🃏 抽到卡片: ${postResult.data.Tarot_card_meaning?.name_zh || 'unknown'} (${postResult.data.Tarot_card_meaning?.name_en || 'unknown'})`)
+        console.log(`🃏 抽到卡片: ${postResult.data.Tarot_card_meaning?.card_chinese_name || 'unknown'} (${postResult.data.Tarot_card_meaning?.card_name || 'unknown'})`)
         console.log(`🔄 是否逆位: ${postResult.data.is_reversed ? '是' : '否'}`)
 
         // 測試 3: 更新每日反思 (PUT)
