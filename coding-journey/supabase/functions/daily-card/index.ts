@@ -66,7 +66,7 @@ async function handleGetDailyCard(supabase: any, userId: string) {
     .from('daily_cards')
     .select(`
       *,
-      Tarot_card_meaning (
+      "Tarot_card_meaning" (
         id,
         name_en,
         name_zh,
@@ -167,7 +167,7 @@ async function handleDrawDailyCard(supabase: any, userId: string, body: any) {
     .insert(dailyCardData)
     .select(`
       *,
-      Tarot_card_meaning (
+      "Tarot_card_meaning" (
         id,
         name_en,
         name_zh,
@@ -249,7 +249,7 @@ async function handleUpdateDailyCard(supabase: any, userId: string, body: any) {
     .eq('draw_date', today)
     .select(`
       *,
-      Tarot_card_meaning (
+      "Tarot_card_meaning" (
         id,
         name_en,
         name_zh,

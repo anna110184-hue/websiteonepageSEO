@@ -30,7 +30,7 @@ BEGIN
         tc.suit,
         tc.image_url,
         (allow_reversed AND random() < 0.3)::BOOLEAN as is_reversed
-    FROM Tarot_card_meaning tc
+    FROM "Tarot_card_meaning" tc
     WHERE tc.id != ALL(exclude_cards)
     ORDER BY random()
     LIMIT card_count;

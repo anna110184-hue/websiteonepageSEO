@@ -24,17 +24,26 @@
 
 ## 🚀 安裝步驟
 
-### 步驟 1: 檢查並修正表格引用
+### 步驟 1: 診斷表格名稱問題
+```sql
+-- 在 Supabase SQL Editor 執行
+\i supabase/fix-case-sensitive-references.sql
+```
+這個腳本會：
+- 檢查 `Tarot_card_meaning` 表格是否存在（不區分大小寫）
+- 顯示實際的表格名稱和結構
+- 驗證必要欄位是否存在
+- 測試相關函數
+
+### 步驟 2: 修正表格引用
 ```sql
 -- 在 Supabase SQL Editor 執行
 \i supabase/fix-tarot-references.sql
 ```
 這個腳本會：
-- 檢查 `Tarot_card_meaning` 表格是否存在
-- 顯示表格結構供驗證
-- 更新 `get_random_tarot_cards` 函數
+- 更新 `get_random_tarot_cards` 函數使用正確的表格名稱
 
-### 步驟 2: 創建用戶系統和相關表格
+### 步驟 3: 創建用戶系統和相關表格
 ```sql
 -- 在 Supabase SQL Editor 執行
 \i supabase/setup-tarot-backend.sql
@@ -48,7 +57,7 @@
 - 所有必要的 RLS 政策
 - 資料庫函數和觸發器
 
-### 步驟 3: 部署 Edge Functions
+### 步驟 4: 部署 Edge Functions
 ```bash
 # 部署每日卡片功能
 supabase functions deploy daily-card
@@ -57,7 +66,7 @@ supabase functions deploy daily-card
 supabase functions deploy three-card-reading
 ```
 
-### 步驟 4: 測試安裝
+### 步驟 5: 測試安裝
 ```bash
 # 安裝測試依賴
 npm install @supabase/supabase-js dotenv
